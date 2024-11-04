@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HotOrNot?</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 <body>
     <!-- Header Section -->
@@ -36,5 +34,121 @@
         <p>Every day, the dataset is loaded with 10 new images.</p>
     </div>
 </body>
+<style>
+    /* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
 
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    text-align: center;
+}
+
+h2 {
+    margin: 20px 0;
+    font-size: 24px;
+}
+
+/* Additional styling for images container */
+.images-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Allows images to stack on smaller screens */
+}
+
+.image {
+    border: 2px solid #ccc;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.image img {
+    width: 100%; /* Ensure images are responsive */
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+}
+
+.image img:hover {
+    cursor: pointer;
+}
+
+p {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.footer-text p:nth-of-type(3) {
+    font-weight: bold;
+    font-size: 17px;
+    color: #333;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For tablets and smaller laptops */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    .image img {
+        max-width: 400px;
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    h2 {
+        font-size: 18px;
+    }
+
+    .images-container {
+        flex-direction: column; /* Stack images vertically */
+        align-items: center;
+    }
+
+    .image img {
+        max-width: 300px; /* Smaller size for mobile */
+        height: auto;     /* Keep image proportions */
+    }
+
+    .footer-text p {
+        font-size: 13px;
+        padding: 0 10px;
+    }
+
+    .footer-text p:nth-of-type(3) {
+        font-size: 15px;
+    }
+}
+</style>
+<script>
+    
+</script>
 </html>
