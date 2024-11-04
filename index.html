@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HotOrNot?</title>
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
     <!-- Header Section -->
     <header>
-
-    <h1>Unofficial HotOrNot.com</h1>
-
+        <h1>Unofficial HotOrNot.com</h1>
     </header>
 
     <div class="container">
         <h2>Who's Better?</h2>
         <div class="images-container">
-            <div class="image" data-id="{{ images[0][0] }}" data-score="{{ images[0][2] }}">
-                <img src="{{ url_for('static', filename=images[0][1].split('static/')[1]) }}" alt="Image 1">
-                <p>Vote(s): <span class="vote">{{ images[0][2] }}</span></p>
+            <!-- Placeholder Images -->
+            <div class="image" data-id="1" data-score="5">
+                <img src="static/images/image1.jpg" alt="Image 1">
+                <p>Vote(s): <span class="vote">5</span></p>
             </div>
-            <div class="image" data-id="{{ images[1][0] }}" data-score="{{ images[1][2] }}">
-                <img src="{{ url_for('static', filename=images[1][1].split('static/')[1]) }}" alt="Image 2">
-                <p>Vote(s): <span class="vote">{{ images[1][2] }}</span></p>
+            <div class="image" data-id="2" data-score="3">
+                <img src="static/images/image2.jpg" alt="Image 2">
+                <p>Vote(s): <span class="vote">3</span></p>
             </div>
         </div>
     </div><br>
@@ -33,156 +33,120 @@
         <p>This website is for you and your loved ones. Share it with the people you care for. This is strictly for fun and doesn't mean any disrespect to the school girls.</p>
         <p>Every day, the dataset is loaded with 10 new images.</p>
     </div>
-</body>
-<style>
-    /* General styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f4f4f4;
-}
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.container {
-    text-align: center;
-}
-
-h2 {
-    margin: 20px 0;
-    font-size: 24px;
-}
-
-/* Additional styling for images container */
-.images-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap; /* Allows images to stack on smaller screens */
-}
-
-.image {
-    border: 2px solid #ccc;
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.image img {
-    width: 100%; /* Ensure images are responsive */
-    max-width: 500px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    object-fit: cover;
-}
-
-.image img:hover {
-    cursor: pointer;
-}
-
-p {
-    text-align: center;
-    margin: 10px 0;
-    font-size: 15px;
-    color: #333;
-}
-
-.footer-text p:nth-of-type(3) {
-    font-weight: bold;
-    font-size: 17px;
-    color: #333;
-}
-
-/* Media Queries for Responsiveness */
-
-/* For tablets and smaller laptops */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.8em;
-    }
-    h2 {
-        font-size: 20px;
-    }
-    .image img {
-        max-width: 400px;
-    }
-}
-
-/* For mobile devices */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 1.5em;
-    }
-    h2 {
-        font-size: 18px;
-    }
-
-    .images-container {
-        flex-direction: column; /* Stack images vertically */
-        align-items: center;
-    }
-
-    .image img {
-        max-width: 300px; /* Smaller size for mobile */
-        height: auto;     /* Keep image proportions */
-    }
-
-    .footer-text p {
-        font-size: 13px;
-        padding: 0 10px;
-    }
-
-    .footer-text p:nth-of-type(3) {
-        font-size: 15px;
-    }
-}
-</style>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-    const imagesContainer = document.querySelector(".images-container");
-
-    imagesContainer.addEventListener("click", async (event) => {
-        const selectedImage = event.target.closest(".image");
-        if (selectedImage) {
-            const winnerId = selectedImage.getAttribute("data-id");
-
-            try {
-                const response = await fetch("/vote", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ winner_id: winnerId })
-                });
-
-                const data = await response.json();
-                updateImages(data.images);
-            } catch (error) {
-                console.error("Error:", error);
+    <!-- Inline Style (recommended to move to style.css if using a local server or actual deployment) -->
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        h2 {
+            margin: 20px 0;
+            font-size: 24px;
+        }
+        /* Additional styling for images container */
+        .images-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .image {
+            border: 2px solid #ccc;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .image img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+        }
+        .image img:hover {
+            cursor: pointer;
+        }
+        p {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 15px;
+            color: #333;
+        }
+        .footer-text p:nth-of-type(3) {
+            font-weight: bold;
+            font-size: 17px;
+            color: #333;
+        }
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            .image img {
+                max-width: 400px;
             }
         }
-    });
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            h2 {
+                font-size: 18px;
+            }
+            .images-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .image img {
+                max-width: 300px;
+                height: auto;
+            }
+            .footer-text p {
+                font-size: 13px;
+                padding: 0 10px;
+            }
+            .footer-text p:nth-of-type(3) {
+                font-size: 15px;
+            }
+        }
+    </style>
 
-    function updateImages(images) {
-        imagesContainer.children[0].setAttribute("data-id", images[0][0]);
-        imagesContainer.children[0].querySelector("img").src = images[0][1];
-        imagesContainer.children[0].querySelector(".vote").textContent = images[0][2];
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const imagesContainer = document.querySelector(".images-container");
 
-        imagesContainer.children[1].setAttribute("data-id", images[1][0]);
-        imagesContainer.children[1].querySelector("img").src = images[1][1];
-        imagesContainer.children[1].querySelector(".vote").textContent = images[1][2];
-    }
-});
-</script>
+            imagesContainer.addEventListener("click", async (event) => {
+                const selectedImage = event.target.closest(".image");
+                if (selectedImage) {
+                    const winnerId = selectedImage.getAttribute("data-id");
+
+                    // Update votes manually as we don't have a back-end
+                    const voteElement = selectedImage.querySelector(".vote");
+                    voteElement.textContent = parseInt(voteElement.textContent) + 1;
+                }
+            });
+        });
+    </script>
+</body>
 </html>
